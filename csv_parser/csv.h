@@ -17,8 +17,7 @@ struct DataFrame {
 	double** data;
 };
 
-#include <stdio.h>
-void parse(FILE* src, DataFrame* df);
+void parse(const char* filename, DataFrame* df);
 void free_dataframe(DataFrame* df);
 
 #endif /* end of include guard: ML_SCRATCH_H */

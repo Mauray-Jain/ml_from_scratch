@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-void parse(FILE* src, DataFrame* df) {
+void parse(const char* filename, DataFrame* df) {
+	FILE* src = fopen("test.csv", "rb");
 	char buf[LINE_MAX] = {0};
 	fgets(buf, LINE_MAX, src);
 	size_t commas = 0;
@@ -53,6 +54,7 @@ void parse(FILE* src, DataFrame* df) {
 		col = 0;
 		row++;
 	}
+	fclose(src);
 }
 
 void free_dataframe(DataFrame* df) {
@@ -72,9 +74,8 @@ void free_dataframe(DataFrame* df) {
 }
 
 static int test(void) {
-	FILE* src = fopen("test.csv", "r");
 	DataFrame df = {0};
-	parse(src, &df);
+	parse("test.csv", &df);
 	/*printf("%lu\n", df.len_cols);*/
 	printf("%lu, %lu\n", df.len_cols, df.len_rows);
 	for (size_t i = 0; i < df.len_cols; i++) {
@@ -84,6 +85,6 @@ static int test(void) {
 		}
 	}
 	free_dataframe(&df);
-	fclose(src);
 	return 0;
 }
+
