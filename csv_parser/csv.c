@@ -1,10 +1,10 @@
-#include "../str.h"
+#include "csv.h"
 #include <bits/posix2_lim.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-int parse(FILE* src, DataFrame* df) {
+void parse(FILE* src, DataFrame* df) {
 	char buf[LINE_MAX] = {0};
 	fgets(buf, LINE_MAX, src);
 	size_t commas = 0;
@@ -53,10 +53,25 @@ int parse(FILE* src, DataFrame* df) {
 		col = 0;
 		row++;
 	}
-	return 0;
 }
 
-int main(void) {
+void free_dataframe(DataFrame* df) {
+	for (size_t i = 0; i < df->len_cols; i++) {
+		free(df->col_names[i].ptr);
+		df->col_names[i].ptr = NULL;
+		df->col_names[i].len = 0;
+		free(df->data[i]);
+		df->data[i] = NULL;
+	}
+	free(df->col_names);
+	df->col_names = NULL;
+	free(df->data);
+	df->data = NULL;
+	df->len_rows = 0;
+	df->len_cols = 0;
+}
+
+static int test(void) {
 	FILE* src = fopen("test.csv", "r");
 	DataFrame df = {0};
 	parse(src, &df);
@@ -67,11 +82,8 @@ int main(void) {
 		for (size_t j = 0; j < df.len_rows; j++) {
 			printf("[%lu][%lu] = %lf\n", i, j, df.data[i][j]);
 		}
-		free(df.col_names[i].ptr);
-		free(df.data[i]);
 	}
-	free(df.col_names);
-	free(df.data);
+	free_dataframe(&df);
 	fclose(src);
 	return 0;
 }
