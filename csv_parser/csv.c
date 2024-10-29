@@ -5,7 +5,7 @@
 #include <string.h>
 
 void parse(const char* filename, DataFrame* df) {
-	FILE* src = fopen("test.csv", "rb");
+	FILE* src = fopen(filename, "rb");
 	char buf[LINE_MAX] = {0};
 	fgets(buf, LINE_MAX, src);
 	size_t commas = 0;
