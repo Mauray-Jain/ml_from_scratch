@@ -70,6 +70,7 @@ int main(void) {
 		free(df.col_names[i].ptr);
 		free(df.data[i]);
 	}
+	free(df.col_names);
 	free(df.data);
 	fclose(src);
 	return 0;
