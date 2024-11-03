@@ -1,5 +1,5 @@
-#ifndef ML_SCRATCH_H
-#define ML_SCRATCH_H
+#ifndef ML_SCRATCH_CSV_PARSER_H
+#define ML_SCRATCH_CSV_PARSER_H
 
 #include <stddef.h>
 
@@ -7,6 +7,12 @@ typedef struct str str;
 struct str {
 	size_t len;
 	char* ptr;
+};
+
+typedef struct arr_double arr_double;
+struct arr_double {
+	size_t len;
+	double* ptr;
 };
 
 typedef struct DataFrame DataFrame;
@@ -20,4 +26,4 @@ struct DataFrame {
 void parse(const char* filename, DataFrame* df);
 void free_dataframe(DataFrame* df);
 
-#endif /* end of include guard: ML_SCRATCH_H */
+#endif /* end of include guard: ML_SCRATCH_CSV_PARSER_H */
