@@ -3,7 +3,7 @@
 
 int main(void) {
 	DataFrame df = {0};
-	parse("test.csv", &df);
+	parse("test_csv.csv", &df);
 	printf("%lu\n", df.len_cols);
 	printf("%lu, %lu\n", df.len_cols, df.len_rows);
 	for (size_t i = 0; i < df.len_cols; i++) {
