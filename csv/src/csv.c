@@ -55,6 +55,7 @@ void parse(const char* filename, DataFrame* df) {
 		}
 		col = 0; row++;
 	}
+
 	fclose(src);
 }
 

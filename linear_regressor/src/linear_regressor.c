@@ -36,8 +36,6 @@ static void set_cost(LinearRegressor* lr, DataFrame* df) {
 }
 
 void linear_regressor_fit(LinearRegressor* lr, DataFrame* df, double eeta, int epochs) {
-	double* x = df->data[0];
-	double* y = df->data[1];
 	for (int i = 0; i < epochs; i++) {
 		gradient_descent(lr, df, eeta);
 	}
